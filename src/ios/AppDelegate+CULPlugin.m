@@ -29,4 +29,12 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
     return [plugin handleUserActivity:userActivity];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
+    [activity setWebpageURL:url];
+    
+    CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
+    return [plugin handleUserActivity:activity];
+}
+
 @end
