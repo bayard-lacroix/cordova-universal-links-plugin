@@ -30,11 +30,16 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
-    [activity setWebpageURL:url];
+    if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
+        [activity setWebpageURL:url];
+        
+        CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
+        return [plugin handleUserActivity:activity];
+    }else{
+        return NO;
+    }
     
-    CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
-    return [plugin handleUserActivity:activity];
 }
 
 @end
