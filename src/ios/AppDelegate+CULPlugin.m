@@ -37,6 +37,19 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
         CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
         return [plugin handleUserActivity:activity];
     }else{
+        
+         if ([url.scheme isEqualToString:@"lacroix"]){
+            NSString *UrlString = url.absoluteString;
+            UrlString = [UrlString stringByReplacingOccurrencesOfString:@"lacroix://"
+                                                 withString:@"https://www.la-croix.com/CustomDeeplink/"];
+                    NSURL *composeURL = [NSURL URLWithString:UrlString];
+                    NSLog(@"UgotMe = %@", composeURL);
+                    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
+                    [activity setWebpageURL:composeURL];
+                    CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
+                    return [plugin handleUserActivity:activity];
+                   
+                }
         return NO;
     }
     
