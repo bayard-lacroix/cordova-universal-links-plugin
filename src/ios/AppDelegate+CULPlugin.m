@@ -43,7 +43,7 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
             UrlString = [UrlString stringByReplacingOccurrencesOfString:@"lacroix://"
                                                  withString:@"https://www.la-croix.com/CustomDeeplink/"];
                     NSURL *composeURL = [NSURL URLWithString:UrlString];
-                    NSLog(@"UgotMe = %@", composeURL);
+                  //  NSLog(@"UgotMe = %@", composeURL);
                     NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:NSUserActivityTypeBrowsingWeb];
                     [activity setWebpageURL:composeURL];
                     CULPlugin *plugin = [self.viewController getCommandInstance:PLUGIN_NAME];
