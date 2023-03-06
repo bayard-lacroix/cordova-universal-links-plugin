@@ -38,9 +38,9 @@ static NSString *const PLUGIN_NAME = @"UniversalLinks";
         return [plugin handleUserActivity:activity];
     }else{
         
-         if ([url.scheme isEqualToString:@"lacroix"]){
+         if ([url.absoluteString containsString:@"lacroix://inapp/"]){
             NSString *UrlString = url.absoluteString;
-            UrlString = [UrlString stringByReplacingOccurrencesOfString:@"lacroix://"
+            UrlString = [UrlString stringByReplacingOccurrencesOfString:@"lacroix://inapp/"
                                                  withString:@"https://www.la-croix.com/CustomDeeplink/"];
                     NSURL *composeURL = [NSURL URLWithString:UrlString];
                   //  NSLog(@"UgotMe = %@", composeURL);
